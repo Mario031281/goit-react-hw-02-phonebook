@@ -17,15 +17,7 @@ export class App extends Component {
     filter: '',
   };
 
-  contactId = nanoid();
-
   formSubmitHandler = props => {
-    const contact = {
-      id: nanoid(),
-      name: props.name,
-      number: props.number,
-    };
-
     const findName = this.state.contacts.find(
       elem => elem.name.toLowerCase() === props.name.toLowerCase()
     );
@@ -33,6 +25,11 @@ export class App extends Component {
     if (findName) {
       return alert(`${findName.name} is already in contacts.`);
     }
+    const contact = {
+      id: nanoid(),
+      name: props.name,
+      number: props.number,
+    };
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
     }));
@@ -82,7 +79,6 @@ export class App extends Component {
             <ContactList
               contacts={filteredContacts}
               onDelete={this.handleDelete}
-              id={contacts.id}
             />
           </div>
         </Section>
